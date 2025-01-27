@@ -44,3 +44,25 @@ resource "aws_internet_gateway" "lms-igw" {
     Name = "Lms-Internet-gateway"
   }
 }
+#Lms-puplic-Rout table
+resource "aws_route_table" "lms-pub-rt" {
+  vpc_id = aws_vpc.vpc.lms.id
+
+  route {
+    cidr_block = "10.0.0.0/0"
+    gateway_id = aws_internet_gateway.lms-igw.id
+  }
+
+  tags = {
+    Name = "Lms-puplic-Rout-table"
+  }
+}
+#Lms Pravite-Rout table
+resource "aws_route_table" "lms-pvt-rt" {
+  vpc_id = aws_vpc.vpc.lms.id
+
+  
+  tags = {
+    Name = "Lms-Pravite-Rout-table"
+  }
+}
