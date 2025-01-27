@@ -46,7 +46,7 @@ resource "aws_internet_gateway" "lms-igw" {
 }
 #Lms-puplic-Rout table
 resource "aws_route_table" "lms-pub-rt" {
-  vpc_id = aws_vpc.vpc.lms.id
+  vpc_id = aws_vpc.lms-vpc.id
 
   route {
     cidr_block = "10.0.0.0/0"
@@ -59,7 +59,7 @@ resource "aws_route_table" "lms-pub-rt" {
 }
 #Lms Pravite-Rout table
 resource "aws_route_table" "lms-pvt-rt" {
-  vpc_id = aws_vpc.vpc.lms.id
+  vpc_id = aws_vpc.lms-vpc.id
 
   
   tags = {
