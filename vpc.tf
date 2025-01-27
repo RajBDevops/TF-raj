@@ -66,3 +66,18 @@ resource "aws_route_table" "lms-pvt-rt" {
     Name = "Lms-Pravite-Rout-table"
   }
 }
+# Web route table association
+resource "aws_route_table_association" "lms-web-asc" {
+  subnet_id      = aws_subnet.Lms-web-sn.id
+  route_table_id = aws_route_table.lms-pub-rt.id
+}
+# Api route table association
+resource "aws_route_table_association" "lms-Api-asc" {
+  subnet_id      = aws_subnet.lms-Api-sn.id
+  route_table_id = aws_route_table.lms-pub-rt.id
+}
+# Data Base route table association
+resource "aws_route_table_association" "lms-db-asc" {
+  subnet_id      = aws_subnet.lms-db-sn.id
+  route_table_id = aws_route_table.lms-pvt-rt.id
+}
