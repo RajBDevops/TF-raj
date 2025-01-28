@@ -2,7 +2,6 @@
 resource "aws_instance" "lms-web-server" {
   ami           = "ami-0606dd43116f5ed57" # us-west-2
   instance_type = "t2.micro"
-  availability_zone = "us-west-2d"
   subnet_id     = aws_subnet.Lms-web-sn.id
   key_name = "MahaKey"
   vpc_security_group_ids = [aws_security_group.lms-web-sg.id]
