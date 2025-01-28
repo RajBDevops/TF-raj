@@ -174,3 +174,35 @@ resource "aws_network_acl_association" "lms-db-nacl-ass" {
   network_acl_id = aws_network_acl.lms-db-nacl.id
   subnet_id      = aws_subnet.lms-db-sn.id
 }
+# create security Group - Web
+resource "aws_security_group" "lms-web-sg" {
+  name        = "lms-web-sg"
+  description = "Allow ssh and http traffic"
+  vpc_id      = aws_vpc.lms-vpc.id
+
+  tags = {
+    Name = "lms-web-sg"
+  }
+}
+# create security Group - Web-incoming-ssh
+resource "aws_vpc_security_group_ingress_rule" "lms-web-sg-ing-ssh" {
+  security_group_id = aws_security_group.lms-web-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+# create security Group - Web-incoming-http
+resource "aws_vpc_security_group_ingress_rule" "lms-web-sg-ing-http" {
+  security_group_id = aws_security_group.lms-web-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
+# create security Group - Web-egress
+resource "aws_vpc_security_group_egress_rule" "lms-web-sg-egs" {
+  security_group_id = aws_security_group.lms-web-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1" 
+}
