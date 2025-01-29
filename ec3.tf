@@ -1,5 +1,6 @@
 #create EC2-webserver
 resource "aws_instance" "lms-web-server" {
+  availability_zone = "us-west-2a"
   ami           = "ami-0606dd43116f5ed57" 
   instance_type = "t2.micro"
   subnet_id = aws_subnet.Lms-web-sn.id
