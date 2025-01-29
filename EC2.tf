@@ -1,7 +1,7 @@
 #create EC2-webserver
 resource "aws_instance" "lms-web-server" {
   ami           = "ami-0606dd43116f5ed57" # us-west-2
-  availability_zone = "us-west-2d"
+  availability_zone = "us-west-2a"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.Lms-web-sn.id
   key_name = "MahaKey"
