@@ -10,4 +10,3 @@ resource "aws_instance" "lms-web-server" {
     Name= "lms-web_server"
   }
 }
-  
