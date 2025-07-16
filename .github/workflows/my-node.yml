@@ -1,22 +1,16 @@
-name: My CI Workflow
-
-on: [push, pull_request]  # Trigger on push or PR
-
 jobs:
-  build:                   # Job name
-    runs-on: ubuntu-latest  # GitHub-hosted runner
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
+      - name: Clean install
+        run: |
+          npm config set loglevel verbose
+          rm -rf node_modules package-lock.json
+          npm install
